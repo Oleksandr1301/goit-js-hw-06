@@ -27,11 +27,12 @@ const createEl = () => {
   }
 };
 
-buttonCreateEl.addEventListener("click", createEl)
+buttonCreateEl.addEventListener("click", createEl);
 
 buttonDestroyEl.addEventListener("click", destroyEl);
 
-function destroyEl(event) {
+function destroyEl() {
   divBoxesEl.innerHTML = "";
   inputEL.value = "";
+  baseBoxSize = 30;
 }
