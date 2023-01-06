@@ -1,5 +1,7 @@
 function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, 0)}`;
 }
 
 const inputEL = document.querySelector("input");
@@ -7,20 +9,25 @@ const buttonCreateEl = document.querySelector("[data-create]");
 const buttonDestroyEl = document.querySelector("[data-destroy]");
 const divBoxesEl = document.querySelector("#boxes");
 
-buttonCreateEl.addEventListener("click", (event) =>
-  createEl(Number(inputEL.value))
-);
+const inputChange = (e) => {
+  inputEL.setAttribute("count", Number(e.currentTarget.value));
+};
+inputEL.addEventListener("input", inputChange);
 
-function createEl(amount) {
-  let divsEl = [];
-  for (let i = 0; i < amount; i += 1) {
+let baseBoxSize = 30;
+
+const createEl = () => {
+  let divsEl = Number(inputEL.getAttribute("count"));;
+  for (let i = 0; i < divsEl; i += 1) {
     const div = document.createElement("div");
-    div.style.width = div.style.height = `${30 + i * 10}px `;
+    div.style.width = div.style.height = `${baseBoxSize}px `;
     div.style.backgroundColor = getRandomHexColor();
-    divsEl.push(div);
+    baseBoxSize += 10;
+    divBoxesEl.append(div);
   }
-  divBoxesEl.append(...divsEl);
-}
+};
+
+buttonCreateEl.addEventListener("click", createEl)
 
 buttonDestroyEl.addEventListener("click", destroyEl);
 

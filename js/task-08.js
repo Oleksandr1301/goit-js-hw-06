@@ -9,7 +9,7 @@ function handleSubmit(event) {
     return alert("All fields must be completed!");
   }
 
-  console.log({ Email: email.value, Password: password.value });
+  console.log({ email: email.value, password: password.value });
 
   event.currentTarget.reset();
 }
